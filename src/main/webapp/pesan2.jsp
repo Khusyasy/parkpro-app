@@ -10,25 +10,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">ParkPro</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <jsp:include page="navbar.jsp" />
 
     <div class="container-fluid d-flex justify-content-center align-items-center">
       <div class="row g-2 justify-content-between align-items-center"

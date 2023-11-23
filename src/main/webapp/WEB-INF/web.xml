@@ -7,7 +7,7 @@
     </session-config>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.parkpro.LoginServlet</servlet-class>
+        <servlet-class>com.parkpro.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -15,10 +15,26 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.parkpro.RegisterServlet</servlet-class>
+        <servlet-class>com.parkpro.servlet.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.parkpro.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Pesan1Servlet</servlet-name>
+        <servlet-class>com.parkpro.servlet.Pesan1Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Pesan1Servlet</servlet-name>
+        <url-pattern>/Pesan1Servlet</url-pattern>
     </servlet-mapping>
 </web-app>
