@@ -1,7 +1,7 @@
-package com.khusyasy.parkpro.servlet;
+package com.parkpro.servlet;
 
-import com.khusyasy.parkpro.PenggunaDAO;
-import com.khusyasy.parkpro.Pengguna;
+import com.parkpro.PenggunaDAO;
+import com.parkpro.Pengguna;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

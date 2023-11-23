@@ -1,4 +1,4 @@
-package com.khusyasy.parkpro.resources;
+package com.parkpro.resources;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

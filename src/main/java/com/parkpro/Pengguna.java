@@ -1,4 +1,4 @@
-package com.khusyasy.parkpro;
+package com.parkpro;
 
 import java.util.Date;
 import org.mindrot.jbcrypt.BCrypt;

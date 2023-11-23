@@ -1,4 +1,4 @@
-package com.khusyasy.parkpro;
+package com.parkpro;
 
 import java.io.IOException;
 import java.io.InputStream;

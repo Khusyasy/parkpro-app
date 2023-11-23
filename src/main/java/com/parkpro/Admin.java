@@ -1,4 +1,4 @@
-package com.khusyasy.parkpro;
+package com.parkpro;
 
 /**
  *
