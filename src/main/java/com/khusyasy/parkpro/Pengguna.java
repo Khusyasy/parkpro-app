@@ -1,6 +1,7 @@
 package com.khusyasy.parkpro;
 
 import java.util.Date;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -19,10 +20,24 @@ public class Pengguna {
         this.id = id;
         this.gender = gender;
         this.noTelepon = noTelepon;
-        this.password = password;
+        this.password = hashPassword(password);
         this.dateOfBirth = dateOfBirth;
         this.nama = nama;
         this.jenisKendaraan = jenisKendaraan;
+    }
+
+    public Pengguna(int id, String gender, String noTelepon, String password, String dateOfBirth, String nama, String jenisKendaraan, boolean db) {
+        this.id = id;
+        this.gender = gender;
+        this.noTelepon = noTelepon;
+        this.password = db ? password : hashPassword(password);
+        this.dateOfBirth = dateOfBirth;
+        this.nama = nama;
+        this.jenisKendaraan = jenisKendaraan;
+    }
+
+    public static String hashPassword(String plainTextPassword) {
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
 
     public int getId() {
@@ -37,6 +52,10 @@ public class Pengguna {
         return noTelepon;
     }
 
+    public String getPassword() {
+        return password;
+    }
+    
     public String getDateOfBirth() {
         return dateOfBirth;
     }
@@ -48,9 +67,9 @@ public class Pengguna {
     public String getJenisKendaraan() {
         return jenisKendaraan;
     }
-
+    
     public boolean checkPassword(String inputPass) {
-        return password.equals(inputPass);
+        return BCrypt.checkpw(inputPass, password); 
     }
 
     public void pesanLahanParkir(Parkiran parkiran, int id) {

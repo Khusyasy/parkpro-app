@@ -1,0 +1,32 @@
+.parkir-red {
+  background: #FF7067;
+}
+
+.parkir-green {
+  background: #82FF96;
+}
+
+.parkir-blue {
+  background: #82BBFF;
+}
+
+.parkir-gray {
+  background: #c3c3c3;
+}
+
+.parkir-box-small {
+  width: 64px;
+  height: 16px;
+  border: 1px black solid;
+}
+
+.parkir-box {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border: 1px black solid;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 64px;
+  cursor: pointer;
+}
