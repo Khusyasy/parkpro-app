@@ -26,32 +26,34 @@ public class RegisterServlet extends HttpServlet {
         String dob = request.getParameter("dob");
 
         HttpSession session = request.getSession(true);
+            
+        if (phone == null || phone.isEmpty() || password == null || password.isEmpty() || gender == null || gender.isEmpty() || dob == null || dob.isEmpty()) {
+            session.setAttribute("errorMessage", "Semua input harus diisi");
+            response.sendRedirect("register.jsp");
+            return;
+        }
+
+        if (phone.startsWith("0")) {
+            phone = "+62" + phone.substring(1);
+        } else if (!phone.startsWith("+")) {
+            session.setAttribute("errorMessage", "Nomor telepon harus dimulai dengan 0 untuk negara Indonesia atau kode area (contoh +62)");
+            response.sendRedirect("register.jsp");
+            return;
+        }
+
+        if (password.length() < 8 || !password.matches(".*\\d.*") || !password.matches(".*[a-zA-Z].*")) {
+            session.setAttribute("errorMessage", "Password minimal 8 karakter dan harus mengandung setidaknya satu huruf dan satu angka");
+            response.sendRedirect("register.jsp");
+            return;
+        }
         
         try {
             PenggunaDAO penggunaDAO = new PenggunaDAO();
             Pengguna pengguna = new Pengguna(-1, gender, phone, password, dob, "", "");
-            
-            if (phone == null || phone.isEmpty() || password == null || password.isEmpty() || gender == null || gender.isEmpty() || dob == null || dob.isEmpty()) {
-                session.setAttribute("errorMessage", "Semua input harus diisi");
-                response.sendRedirect("register.jsp");
-                return;
-            }
 
             Pengguna check = penggunaDAO.getPengguna(phone);
             if (check != null) {
                 session.setAttribute("errorMessage", "Nomor telepon sudah digunakan");
-                response.sendRedirect("register.jsp");
-                return;
-            }
-
-            if (password.length() < 8) {
-                session.setAttribute("errorMessage", "Password minimal 8 karakter");
-                response.sendRedirect("register.jsp");
-                return;
-            }
-
-            if (!gender.equals("male") && !gender.equals("female")) {
-                session.setAttribute("errorMessage", "Gender tidak valid");
                 response.sendRedirect("register.jsp");
                 return;
             }

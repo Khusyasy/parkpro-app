@@ -58,14 +58,17 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
         window.onload = function() {
-          var now = new Date();
-          var twoHoursLater = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+          const now = new Date();
+          now.setHours(now.getHours() + 1, 0, 0, 0);
 
-          document.getElementById('datein').valueAsDate = now;
-          document.getElementById('timein').value = now.toTimeString().slice(0, 5);
+          const satuJam = new Date(now.getTime());
+          const tigaJam = new Date(now.getTime() + 2 * 60 * 60 * 1000);
 
-          document.getElementById('dateout').valueAsDate = twoHoursLater;
-          document.getElementById('timeout').value = twoHoursLater.toTimeString().slice(0, 5);
+          document.getElementById('datein').valueAsDate = satuJam;
+          document.getElementById('timein').value = satuJam.toTimeString().slice(0, 5);
+
+          document.getElementById('dateout').valueAsDate = tigaJam;
+          document.getElementById('timeout').value = tigaJam.toTimeString().slice(0, 5);
         };
     </script>
   </body>

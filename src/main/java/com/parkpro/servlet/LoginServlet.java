@@ -23,6 +23,14 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         HttpSession session = request.getSession(true);
+            
+        if (phone.startsWith("0")) {
+            phone = "+62" + phone.substring(1);
+        } else if (!phone.startsWith("+")) {
+            session.setAttribute("errorMessage", "Nomor telepon harus dimulai dengan 0 untuk negara Indonesia atau kode area (contoh +62)");
+            response.sendRedirect("register.jsp");
+            return;
+        }
         
         try {
             PenggunaDAO penggunaDAO = new PenggunaDAO();
