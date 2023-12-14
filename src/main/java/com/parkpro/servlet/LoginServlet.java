@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             phone = "+62" + phone.substring(1);
         } else if (!phone.startsWith("+")) {
             session.setAttribute("errorMessage", "Nomor telepon harus dimulai dengan 0 untuk negara Indonesia atau kode area (contoh +62)");
-            response.sendRedirect("register.jsp");
+            response.sendRedirect("login.jsp");
             return;
         }
         
