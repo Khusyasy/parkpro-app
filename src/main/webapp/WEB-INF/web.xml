@@ -37,4 +37,20 @@
         <servlet-name>Pesan1Servlet</servlet-name>
         <url-pattern>/Pesan1Servlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Pesan2Servlet</servlet-name>
+        <servlet-class>com.parkpro.servlet.Pesan2Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Pesan2Servlet</servlet-name>
+        <url-pattern>/Pesan2Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Pesan3Servlet</servlet-name>
+        <servlet-class>com.parkpro.servlet.Pesan3Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Pesan3Servlet</servlet-name>
+        <url-pattern>/Pesan3Servlet</url-pattern>
+    </servlet-mapping>
 </web-app>

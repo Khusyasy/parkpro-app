@@ -44,7 +44,7 @@
           </a>
         </div>
         <div class="col-12">
-          <a href="/tiket.jsp" class="card text-decoration-none mb-3">
+          <a href="/TiketServlet" class="card text-decoration-none mb-3">
             <div class="row g-0">
               <div class="col-2 d-flex justify-content-center align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

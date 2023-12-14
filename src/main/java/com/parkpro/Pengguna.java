@@ -74,7 +74,7 @@ public class Pengguna {
 
     public void pesanLahanParkir(Parkiran parkiran, int id) {
         parkiran.masukParkir(id);
-        Tiket tiket = new Tiket(id, this, parkiran.findLahanParkir(id), new Date(), null);
+        Tiket tiket = new Tiket(id, this.id, id, null, null);
         System.out.println("Tiket anda: " + tiket.getId());
     }
 }

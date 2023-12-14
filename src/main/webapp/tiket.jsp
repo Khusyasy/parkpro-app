@@ -1,3 +1,15 @@
+<%@ page import="com.parkpro.Tiket" %>
+<%@ page import="com.parkpro.LahanParkir" %>
+<%
+    if (session == null || session.getAttribute("id") == null) {
+        response.sendRedirect("login.jsp");
+    }
+    if (request == null || request.getAttribute("tiket") == null || request.getAttribute("lahan") == null) {
+        response.sendRedirect("index.jsp");
+    }
+    Tiket tiket = (Tiket) request.getAttribute("tiket");
+    LahanParkir lahan = (LahanParkir) request.getAttribute("lahan");
+%>
 <!doctype html>
 <html lang="en">
 
@@ -24,34 +36,32 @@
           <div class="pb-2">
             <img src="/images/barcode.png" alt="Barcode XYZ" class="img-fluid">
             <div class="text-body-secondary text-center">
-              1234567890
+              <%= tiket.getId() %>
             </div>
           </div>
         </div>
         <hr class="m-0 lh-1">
         <div class="col-12 p-2">
           <div class="text-body-secondary">
-            Lokasi Parkir:
+            Lahan Parkir:
             <span class="fw-bold">
-              Lantai 1 - F2 - 3
-            </span>
-          </div>
-          <div class="text-body-secondary">
-            Dipesan:
-            <span class="fw-bold">
-              Rabu, 21 Desember 2022, 8:35
+              <%= lahan.getLantai() %>
+              -
+              <%= lahan.getLokasi() %>
+              -
+              <%= lahan.getNomor() %>
             </span>
           </div>
           <div class="text-body-secondary">
             Masuk:
             <span class="fw-bold">
-              Rabu, 21 Desember 2022, 10:00
+              <%= tiket.getWaktuMasuk() %>
             </span>
           </div>
           <div class="text-body-secondary">
             Keluar:
             <span class="fw-bold">
-              Rabu, 21 Desember 2022, 12:00
+              <%= tiket.getWaktuKeluar() %>
             </span>
           </div>
         </div>
@@ -68,7 +78,7 @@
         </div>
       </div>
       <div class="col-12 d-grid mt-4">
-        <a href="#" class="btn btn-primary">Kembali</a>
+        <a href="/" class="btn btn-primary">Kembali</a>
       </div>
     </div>
 

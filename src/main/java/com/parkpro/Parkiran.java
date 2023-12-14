@@ -56,7 +56,7 @@ public class Parkiran {
 
     public boolean masukParkir(int id) {
         LahanParkir lahan = findLahanParkir(id);
-        if (lahan.getTersedia()) {
+        if (lahan.isTersedia()) {
             lahan.setTersedia(false);
             return true;
         } else {
@@ -66,7 +66,7 @@ public class Parkiran {
 
     public boolean keluarParkir(int id) {
         LahanParkir lahan = findLahanParkir(id);
-        if (!lahan.getTersedia()) {
+        if (!lahan.isTersedia()) {
             lahan.setTersedia(true);
             return true;
         } else {

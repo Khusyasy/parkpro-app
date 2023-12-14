@@ -1,6 +1,6 @@
 package com.parkpro;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -8,12 +8,12 @@ import java.util.Date;
  */
 public class Tiket {
     private int id;
-    private Pengguna pengguna;
-    private LahanParkir lahan;
-    private Date waktuMasuk;
-    private Date waktuKeluar;
+    private int pengguna;
+    private int lahan;
+    private Timestamp waktuMasuk;
+    private Timestamp waktuKeluar;
 
-    public Tiket(int id, Pengguna pengguna, LahanParkir lahan, Date waktuMasuk, Date waktuKeluar) {
+    public Tiket(int id, int pengguna, int lahan, Timestamp waktuMasuk, Timestamp waktuKeluar) {
         this.id = id;
         this.pengguna = pengguna;
         this.lahan = lahan;
@@ -25,19 +25,19 @@ public class Tiket {
         return id;
     }
 
-    public Pengguna getPengguna() {
+    public int getPengguna() {
         return pengguna;
     }
 
-    public LahanParkir getLahan() {
+    public int getLahan() {
         return lahan;
     }
 
-    public Date getWaktuMasuk() {
+    public Timestamp getWaktuMasuk() {
         return waktuMasuk;
     }
 
-    public Date getWaktuKeluar() {
+    public Timestamp getWaktuKeluar() {
         return waktuKeluar;
     }
     

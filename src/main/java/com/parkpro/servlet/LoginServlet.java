@@ -1,15 +1,17 @@
 package com.parkpro.servlet;
 
-import com.parkpro.PenggunaDAO;
-import com.parkpro.Pengguna;
 import java.io.IOException;
+import java.sql.SQLException;
+
+import com.parkpro.Pengguna;
+import com.parkpro.PenggunaDAO;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
 
 /**
  *
@@ -48,6 +50,7 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
 
+            session.setAttribute("id", pengguna.getId());
             session.setAttribute("phone", phone);
             response.sendRedirect("index.jsp");
         } catch (SQLException ex) {
