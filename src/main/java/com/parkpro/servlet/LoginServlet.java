@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 
             session.setAttribute("id", pengguna.getId());
             session.setAttribute("phone", phone);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("/");
         } catch (SQLException ex) {
             throw new ServletException("Database access error", ex);
         }

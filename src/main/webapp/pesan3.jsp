@@ -82,6 +82,9 @@
             <div class="col-12 d-grid mt-4">
               <button type="submit" class="btn btn-primary btn-lg">Konfirmasi</button>
             </div>
+            <div class="col-12 d-grid mt-2">
+              <a href="/pesan2.jsp" class="btn btn-outline-">Kembali</a>
+            </div>
           </form>
         </div>
       </div>

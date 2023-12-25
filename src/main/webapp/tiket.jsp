@@ -5,7 +5,7 @@
         response.sendRedirect("login.jsp");
     }
     if (request == null || request.getAttribute("tiket") == null || request.getAttribute("lahan") == null) {
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("/");
     }
     Tiket tiket = (Tiket) request.getAttribute("tiket");
     LahanParkir lahan = (LahanParkir) request.getAttribute("lahan");

@@ -57,13 +57,19 @@
               <input type="date" class="form-control" id="dob" name="dob" placeholder="Tanggal Lahir" style="height: 58px;">
             </div>
             <div class="col-12">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
+                <label for="nama">Nama</label>
+              </div>
+            </div>
+<!--            <div class="col-12">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="agree" name="agree">
                 <label class="form-check-label" for="agree">
                   Setuju dengan <a href="#">Syarat dan Ketentuan</a>
                 </label>
               </div>
-            </div>
+            </div>-->
             <div class="col-12 d-grid">
               <button type="submit" class="btn btn-primary btn-lg">Register</button>
             </div>

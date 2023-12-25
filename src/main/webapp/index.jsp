@@ -20,7 +20,19 @@
     <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
       <div class="row">
         <div class="col-12">
-          <a href="/profil.jsp" class="card text-decoration-none mb-3">
+        <% if (session.getAttribute("errorMessage") !=null) { %>
+          <div class="alert alert-danger">
+            <%= session.getAttribute("errorMessage") %>
+          </div>
+          <% session.removeAttribute("errorMessage"); %>
+            <% } %>
+              <% if (session.getAttribute("successMessage") !=null) { %>
+                <div class="alert alert-success">
+                  <%= session.getAttribute("successMessage") %>
+                </div>
+                <% session.removeAttribute("successMessage"); %>
+                  <% } %>
+                    <a href="/profil" class="card text-decoration-none mb-3">
             <div class="row g-0">
               <div class="col-2 d-flex justify-content-center align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -44,7 +56,7 @@
           </a>
         </div>
         <div class="col-12">
-          <a href="/TiketServlet" class="card text-decoration-none mb-3">
+          <a href="/tiket" class="card text-decoration-none mb-3">
             <div class="row g-0">
               <div class="col-2 d-flex justify-content-center align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

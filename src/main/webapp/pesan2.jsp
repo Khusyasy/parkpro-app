@@ -82,8 +82,13 @@
           </div>
           <input type="hidden" name="id_lahan" id="id_lahan" value="-1">
         </div>
-        <div class="col-12 d-grid">
-          <button type="submit" class="btn btn-primary btn-lg">Next</button>
+        <div>
+            <div class="col-12 d-grid">
+              <button type="submit" class="btn btn-primary btn-lg">Next</button>
+            </div>
+            <div class="col-12 d-grid mt-2">
+              <a href="/pesan.jsp" class="btn btn-outline-primary">Kembali</a>
+            </div>
         </div>
       </form>
     </div>
@@ -101,6 +106,7 @@
       function renderParkir() {
         containerParkirEl.innerHTML = "";
         if (lantaiEl.value == "Pilih Lantai") {
+          containerParkirEl.innerHTML = "pilih lantai terlebih dahulu";
           return;
         }
         const lahanByLantai = arrLahan.filter(lahan => lahan.lantai === lantaiEl.value);

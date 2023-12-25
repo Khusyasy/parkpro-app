@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author khusyasy
  */
-@WebServlet(name = "TiketServlet", urlPatterns = {"/TiketServlet"})
+@WebServlet(name = "TiketServlet", urlPatterns = {"/tiket"})
 public class TiketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class TiketServlet extends HttpServlet {
             DB = new Database();
         } catch (SQLException ex) {
             session.setAttribute("errorMessage", "Terjadi kesalahan pada database");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("/");
             return;
         }
         
@@ -43,7 +43,7 @@ public class TiketServlet extends HttpServlet {
             ResultSet rs = DB.executeQuery("SELECT * FROM tiket WHERE id_pengguna = ? ORDER BY id DESC LIMIT 1", session.getAttribute("id"));
             if (!rs.next()) {
                 session.setAttribute("errorMessage", "Belum ada tiket yang dipesan");
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/");
                 return;
             }
             Tiket tiket = new Tiket(rs.getInt("id"), rs.getInt("id_pengguna"), rs.getInt("id_lahan_parkir"), rs.getTimestamp("waktu_masuk"), rs.getTimestamp("waktu_keluar"));
@@ -52,14 +52,14 @@ public class TiketServlet extends HttpServlet {
             rs = DB.executeQuery("SELECT * FROM lahan_parkir WHERE id = ?", tiket.getLahan());
             if (!rs.next()) {
                 session.setAttribute("errorMessage", "Terjadi kesalahan pada database");
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/");
                 return;
             }
             LahanParkir lahan = new LahanParkir(rs.getInt("id"), rs.getString("lantai"), rs.getString("lokasi"), rs.getInt("nomor"), rs.getBoolean("tersedia"));
             request.setAttribute("lahan", lahan);
         } catch (SQLException ex) {
             session.setAttribute("errorMessage", "Terjadi kesalahan pada database");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("/");
             return;
         }
         

@@ -73,6 +73,6 @@ public class Pesan3Servlet extends HttpServlet {
             return;
         }
 
-        response.sendRedirect("TiketServlet");
+        response.sendRedirect("/tiket");
     }
 }

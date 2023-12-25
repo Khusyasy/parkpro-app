@@ -27,7 +27,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Pesan1Servlet</servlet-name>
@@ -52,5 +52,13 @@
     <servlet-mapping>
         <servlet-name>Pesan3Servlet</servlet-name>
         <url-pattern>/Pesan3Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProfilServlet</servlet-name>
+        <servlet-class>com.parkpro.servlet.ProfilServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfilServlet</servlet-name>
+        <url-pattern>/profil</url-pattern>
     </servlet-mapping>
 </web-app>

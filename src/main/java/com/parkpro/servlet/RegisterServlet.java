@@ -24,10 +24,15 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String gender = request.getParameter("gender");
         String dob = request.getParameter("dob");
+        String nama = request.getParameter("nama");
 
         HttpSession session = request.getSession(true);
             
-        if (phone == null || phone.isEmpty() || password == null || password.isEmpty() || gender == null || gender.isEmpty() || dob == null || dob.isEmpty()) {
+        if (phone == null || phone.isEmpty()
+                || password == null || password.isEmpty()
+                || gender == null || gender.isEmpty()
+                || dob == null || dob.isEmpty()
+                || nama == null || nama.isEmpty()) {
             session.setAttribute("errorMessage", "Semua input harus diisi");
             response.sendRedirect("register.jsp");
             return;
@@ -49,7 +54,7 @@ public class RegisterServlet extends HttpServlet {
         
         try {
             PenggunaDAO penggunaDAO = new PenggunaDAO();
-            Pengguna pengguna = new Pengguna(-1, gender, phone, password, dob, "", "");
+            Pengguna pengguna = new Pengguna(-1, gender, phone, password, dob, nama, "mobil");
 
             Pengguna check = penggunaDAO.getPengguna(phone);
             if (check != null) {

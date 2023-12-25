@@ -55,6 +55,9 @@
             <div class="col-12 d-grid">
               <button type="submit" class="btn btn-primary btn-lg">Next</button>
             </div>
+            <div class="col-12 d-grid">
+              <a href="/" class="btn btn-outline-primary">Kembali</a>
+            </div>
           </form>
         </div>
       </div>
