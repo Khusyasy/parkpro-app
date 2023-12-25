@@ -42,7 +42,7 @@
         <hr class="m-0 lh-1">
         <div class="col-12">
           <div class="list-group">
-            <% if (arrTiket==null) { %>
+            <% if (arrTiket==null || arrTiket.length==0) { %>
               <span class="list-group-item disabled text-center">
                 Anda belum memiliki tiket
               </span>

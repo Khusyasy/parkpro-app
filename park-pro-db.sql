@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2023 at 10:17 AM
+-- Generation Time: Dec 25, 2023 at 03:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -34,6 +34,13 @@ CREATE TABLE `admin` (
   `nama` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `nama`) VALUES
+(1, 'admin', 'admin', 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -53,7 +60,7 @@ CREATE TABLE `lahan_parkir` (
 --
 
 INSERT INTO `lahan_parkir` (`id`, `lantai`, `lokasi`, `nomor`, `tersedia`) VALUES
-(1, 'B', 'A1', 1, 0),
+(1, 'B', 'A1', 1, 1),
 (2, 'B', 'A1', 2, 1),
 (3, 'B', 'A1', 3, 1),
 (4, 'B', 'A1', 4, 1),
@@ -139,7 +146,7 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id`, `no_telepon`, `password`, `gender`, `date_of_birth`, `nama`, `jenis_kendaraan`) VALUES
-(7, '+628123456789', '$2a$10$Dz2RzpIvjIx/ON/wLsRY..A5OpNgq424Z2gyzw1yiDrpjzdMyzgQ2', 'male', '2002-12-14', '', '');
+(1, '+628123456789', '$2a$10$v/pNBGD1utxy0YOSeniv8eYhasrW3HIzJn/kQPce9eCfb57Eydx5u', 'male', '2003-05-11', 'Khusyasy', 'mobil');
 
 -- --------------------------------------------------------
 
@@ -154,6 +161,13 @@ CREATE TABLE `tarif` (
   `id_admin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tarif`
+--
+
+INSERT INTO `tarif` (`id`, `harga`, `jenis_kendaraan`, `id_admin`) VALUES
+(1, 3000, 'mobil', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -167,13 +181,6 @@ CREATE TABLE `tiket` (
   `waktu_masuk` datetime NOT NULL,
   `waktu_keluar` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tiket`
---
-
-INSERT INTO `tiket` (`id`, `id_pengguna`, `id_lahan_parkir`, `waktu_masuk`, `waktu_keluar`) VALUES
-(9, 7, 1, '2023-12-14 17:00:00', '2023-12-14 19:00:00');
 
 --
 -- Indexes for dumped tables
@@ -231,7 +238,7 @@ ALTER TABLE `tiket`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lahan_parkir`
@@ -249,19 +256,19 @@ ALTER TABLE `pembayaran`
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tiket`
 --
 ALTER TABLE `tiket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

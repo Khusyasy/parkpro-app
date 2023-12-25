@@ -56,7 +56,7 @@ public class Tiket {
     public String getJamKeluar() {
         return waktuKeluar.toString().substring(11, 19);
     }
-    
+
     public int hitungDurasi() {
         return waktuMasuk.compareTo(waktuKeluar);
     }

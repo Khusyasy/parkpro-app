@@ -27,11 +27,9 @@
         </div>
         <hr class="m-0 lh-1">
         <div class="col-12">
-          <div class="pb-2">
-            <img src="/images/barcode.png" alt="Barcode XYZ" class="img-fluid">
-            <div class="text-body-secondary text-center">
-              <%= tiket.getId() %>
-            </div>
+          <div class="text-center">
+            <img src="/barcode?T=<%= tiket.getId() %>&L=<%= tiket.getLahan() %>"
+                 alt="Barcode T<%= tiket.getId() %>L<%= tiket.getLahan() %>" class="img-fluid w-100" style="max-width: 40rem">
           </div>
         </div>
         <hr class="m-0 lh-1">

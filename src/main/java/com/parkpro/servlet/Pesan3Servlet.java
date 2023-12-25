@@ -1,5 +1,6 @@
 package com.parkpro.servlet;
 
+import com.parkpro.BarcodeCreator;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -12,6 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -62,13 +66,27 @@ public class Pesan3Servlet extends HttpServlet {
 
         try {
             DB.executeUpdate("UPDATE lahan_parkir SET tersedia=0 WHERE id = ?", lahan.getId());
+            
             DB.executeUpdate("INSERT INTO tiket (id_pengguna, id_lahan_parkir, waktu_masuk, waktu_keluar) VALUES (?, ?, ?, ?)",
                 session.getAttribute("id"),
                 lahan.getId(),
                 datein + " " + timein + ":00",
                 dateout + " " + timeout + ":00");
+            int insertID = DB.getLastInsertId();
 
-            response.sendRedirect("/tiket?id=" + DB.getLastInsertId());
+            String code = "T"+insertID+"L"+lahan.getId();
+            BufferedImage image = BarcodeCreator.generateBarcodeImage(code);
+            
+            File directory = new File(BarcodeCreator.path);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            String filename = BarcodeCreator.path + code + ".png";
+            File outputFile = new File(filename);
+            ImageIO.write(image, "png", outputFile);
+            
+            response.sendRedirect("/tiket?id=" + insertID);
         } catch (SQLException ex) {
             session.setAttribute("errorMessage", "Terjadi kesalahan pada database");
             response.sendRedirect("pesan3.jsp");
