@@ -1,14 +1,10 @@
 <%@ page import="com.parkpro.Tiket" %>
 <%@ page import="com.parkpro.LahanParkir" %>
+<%@ page import="com.google.gson.Gson" %>
 <%
-    if (session == null || session.getAttribute("id") == null) {
-        response.sendRedirect("login.jsp");
-    }
-    if (request == null || request.getAttribute("tiket") == null || request.getAttribute("lahan") == null) {
-        response.sendRedirect("/");
-    }
-    Tiket tiket = (Tiket) request.getAttribute("tiket");
-    LahanParkir lahan = (LahanParkir) request.getAttribute("lahan");
+  Gson gson = new Gson();
+  Tiket[] arrTiket = gson.fromJson((String) request.getAttribute("arrTiket"), Tiket[].class);
+  LahanParkir[] arrLahan = gson.fromJson((String) request.getAttribute("arrLahan"), LahanParkir[].class);
 %>
 <!doctype html>
 <html lang="en">
@@ -25,55 +21,45 @@
     <jsp:include page="navbar.jsp" />
 
     <div class="container-fluid d-flex flex-column justify-content-center align-items-center " style="height: 100vh;">
+        <% if (session.getAttribute("errorMessage") != null) { %>
+            <div class="alert alert-danger">
+                <%= session.getAttribute("errorMessage") %>
+            </div>
+            <% session.removeAttribute("errorMessage"); %>
+        <% } %>
+        <% if (session.getAttribute("successMessage") != null) { %>
+            <div class="alert alert-success">
+                <%= session.getAttribute("successMessage") %>
+            </div>
+            <% session.removeAttribute("successMessage"); %>
+        <% } %>
       <div class="row g-0 justify-content-center align-items-center border rounded">
         <div class="col-12">
-          <h2 class="text-center m-2">
-            My Ticket
+          <h2 class="text-center m-4">
+            Riwayat Tiket
           </h2>
         </div>
         <hr class="m-0 lh-1">
         <div class="col-12">
-          <div class="pb-2">
-            <img src="/images/barcode.png" alt="Barcode XYZ" class="img-fluid">
-            <div class="text-body-secondary text-center">
-              <%= tiket.getId() %>
-            </div>
-          </div>
-        </div>
-        <hr class="m-0 lh-1">
-        <div class="col-12 p-2">
-          <div class="text-body-secondary">
-            Lahan Parkir:
-            <span class="fw-bold">
-              <%= lahan.getLantai() %>
-              -
-              <%= lahan.getLokasi() %>
-              -
-              <%= lahan.getNomor() %>
-            </span>
-          </div>
-          <div class="text-body-secondary">
-            Masuk:
-            <span class="fw-bold">
-              <%= tiket.getWaktuMasuk() %>
-            </span>
-          </div>
-          <div class="text-body-secondary">
-            Keluar:
-            <span class="fw-bold">
-              <%= tiket.getWaktuKeluar() %>
-            </span>
-          </div>
-        </div>
-        <hr class="m-0 lh-1">
-        <div class="col-12 p-2 text-center">
-          <div class="text-body-secondary">
-            Scan barcode ini ketika memasuki dan meninggalkan area parkir
-          </div>
-          <div class="text-body-secondary">
-            <span class="fw-bold">
-              ParkPro
-            </span>
+          <div class="list-group">
+            <% if (arrTiket==null) { %>
+              <span class="list-group-item disabled text-center">
+                Anda belum memiliki tiket
+              </span>
+              <% } else { %>
+                <% for (int i=0; i < arrTiket.length; i++) { %>
+                  <%
+                    Tiket tiket = arrTiket[i];
+                    LahanParkir lahan = arrLahan[i];
+                  %>
+                  <a class="list-group-item list-group-item-action" href="/tiket?id=<%= tiket.getId() %>">
+                    Tiket <%= tiket.getId() %>
+                    |
+                    <%= tiket.getTanggalMasuk() %>
+                    <%= tiket.getJamMasuk() %>
+                  </a>
+                <% } %>
+              <% } %>
           </div>
         </div>
       </div>

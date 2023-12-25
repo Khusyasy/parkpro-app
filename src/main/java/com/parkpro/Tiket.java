@@ -40,6 +40,22 @@ public class Tiket {
     public Timestamp getWaktuKeluar() {
         return waktuKeluar;
     }
+
+    public String getTanggalMasuk() {
+        return waktuMasuk.toString().substring(0, 10);
+    }
+
+    public String getTanggalKeluar() {
+        return waktuKeluar.toString().substring(0, 10);
+    }
+
+    public String getJamMasuk() {
+        return waktuMasuk.toString().substring(11, 19);
+    }
+
+    public String getJamKeluar() {
+        return waktuKeluar.toString().substring(11, 19);
+    }
     
     public int hitungDurasi() {
         return waktuMasuk.compareTo(waktuKeluar);

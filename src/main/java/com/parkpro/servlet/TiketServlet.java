@@ -1,5 +1,6 @@
 package com.parkpro.servlet;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +32,8 @@ public class TiketServlet extends HttpServlet {
             return;
         }
 
+        String tiketID = request.getParameter("id");
+
         Database DB;
         try {
             DB = new Database();
@@ -40,29 +44,40 @@ public class TiketServlet extends HttpServlet {
         }
         
         try {
-            ResultSet rs = DB.executeQuery("SELECT * FROM tiket WHERE id_pengguna = ? ORDER BY id DESC LIMIT 1", session.getAttribute("id"));
-            if (!rs.next()) {
-                session.setAttribute("errorMessage", "Belum ada tiket yang dipesan");
-                response.sendRedirect("/");
-                return;
-            }
-            Tiket tiket = new Tiket(rs.getInt("id"), rs.getInt("id_pengguna"), rs.getInt("id_lahan_parkir"), rs.getTimestamp("waktu_masuk"), rs.getTimestamp("waktu_keluar"));
-            request.setAttribute("tiket", tiket);
+            if (tiketID != null && !tiketID.isEmpty()) {
+                ResultSet rs = DB.executeQuery("SELECT t.*, lp.* FROM tiket t JOIN lahan_parkir lp ON t.id_lahan_parkir = lp.id WHERE t.id = ?", tiketID);
+                if (!rs.next()) {
+                    session.setAttribute("errorMessage", "Tiket tidak ditemukan");
+                    response.sendRedirect("/tiket");
+                    return;
+                }
+                Tiket tiket = new Tiket(rs.getInt("id"), rs.getInt("id_pengguna"), rs.getInt("id_lahan_parkir"), rs.getTimestamp("waktu_masuk"), rs.getTimestamp("waktu_keluar"));
+                request.setAttribute("tiket", tiket);
 
-            rs = DB.executeQuery("SELECT * FROM lahan_parkir WHERE id = ?", tiket.getLahan());
-            if (!rs.next()) {
-                session.setAttribute("errorMessage", "Terjadi kesalahan pada database");
-                response.sendRedirect("/");
-                return;
+                LahanParkir lahan = new LahanParkir(rs.getInt("id"), rs.getString("lantai"), rs.getString("lokasi"), rs.getInt("nomor"), rs.getBoolean("tersedia"));
+                request.setAttribute("lahan", lahan);
+
+                request.getRequestDispatcher("tiketDetail.jsp").forward(request, response);
+            } else {
+                ResultSet rs = DB.executeQuery("SELECT t.*, lp.* FROM tiket t JOIN lahan_parkir lp ON t.id_lahan_parkir = lp.id WHERE t.id_pengguna = ? ORDER BY t.id DESC LIMIT 5", session.getAttribute("id"));
+                ArrayList<Tiket> arrTiket = new ArrayList<>();
+                ArrayList<LahanParkir> arrLahan = new ArrayList<>();
+                while (rs.next()) {
+                    Tiket tiket = new Tiket(rs.getInt("id"), rs.getInt("id_pengguna"), rs.getInt("id_lahan_parkir"), rs.getTimestamp("waktu_masuk"), rs.getTimestamp("waktu_keluar"));
+                    LahanParkir lahan = new LahanParkir(rs.getInt("id"), rs.getString("lantai"), rs.getString("lokasi"), rs.getInt("nomor"), rs.getBoolean("tersedia"));
+                    arrTiket.add(tiket);
+                    arrLahan.add(lahan);
+                }
+
+                Gson gson = new Gson();
+                request.setAttribute("arrTiket", gson.toJson(arrTiket));
+                request.setAttribute("arrLahan", gson.toJson(arrLahan));
+
+                request.getRequestDispatcher("tiket.jsp").forward(request, response);
             }
-            LahanParkir lahan = new LahanParkir(rs.getInt("id"), rs.getString("lantai"), rs.getString("lokasi"), rs.getInt("nomor"), rs.getBoolean("tersedia"));
-            request.setAttribute("lahan", lahan);
         } catch (SQLException ex) {
             session.setAttribute("errorMessage", "Terjadi kesalahan pada database");
             response.sendRedirect("/");
-            return;
         }
-        
-        request.getRequestDispatcher("tiket.jsp").forward(request, response);
     }
 }
