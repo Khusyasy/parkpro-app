@@ -82,13 +82,13 @@
           </div>
           <input type="hidden" name="id_lahan" id="id_lahan" value="-1">
         </div>
-        <div>
-            <div class="col-12 d-grid">
-              <button type="submit" class="btn btn-primary btn-lg">Next</button>
+        <div class="col-12">
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Next</button>
             </div>
-            <div class="col-12 d-grid mt-2">
-              <a href="/pesan.jsp" class="btn btn-outline-primary">Kembali</a>
-            </div>
+          <div class="d-grid mt-2">
+            <a href="/pesan.jsp" class="btn btn-outline-primary">Kembali</a>
+          </div>
         </div>
       </form>
     </div>

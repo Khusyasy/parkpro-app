@@ -60,19 +60,18 @@ public class Pesan3Servlet extends HttpServlet {
             return;
         }
 
-        try {   
+        try {
             DB.executeUpdate("UPDATE lahan_parkir SET tersedia=0 WHERE id = ?", lahan.getId());
             DB.executeUpdate("INSERT INTO tiket (id_pengguna, id_lahan_parkir, waktu_masuk, waktu_keluar) VALUES (?, ?, ?, ?)",
-                    session.getAttribute("id"),
-                    lahan.getId(),
-                    datein + " " + timein + ":00",
-                    dateout + " " + timeout + ":00");
-        } catch (SQLException ex) {
-            session.setAttribute("errorMessage", "Terjadi kesalahan pada database" + session.getAttribute("id") + " " + lahan.getId());
-            response.sendRedirect("pesan3.jsp");
-            return;
-        }
+                session.getAttribute("id"),
+                lahan.getId(),
+                datein + " " + timein + ":00",
+                dateout + " " + timeout + ":00");
 
-        response.sendRedirect("/tiket");
+            response.sendRedirect("/tiket?id=" + DB.getLastInsertId());
+        } catch (SQLException ex) {
+            session.setAttribute("errorMessage", "Terjadi kesalahan pada database");
+            response.sendRedirect("pesan3.jsp");
+        }
     }
 }

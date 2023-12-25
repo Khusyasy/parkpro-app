@@ -79,11 +79,13 @@
                 <span class="fw-bold"><%= lahan.getLokasi() %> - <%= lahan.getNomor() %></span>
               </div>
             </div>
-            <div class="col-12 d-grid mt-4">
-              <button type="submit" class="btn btn-primary btn-lg">Konfirmasi</button>
-            </div>
-            <div class="col-12 d-grid mt-2">
-              <a href="/pesan2.jsp" class="btn btn-outline-">Kembali</a>
+            <div class="col-12 mt-4">
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Konfirmasi</button>
+              </div>
+              <div class="d-grid mt-2">
+                <a href="/pesan2.jsp" class="btn btn-outline-primary">Kembali</a>
+              </div>
             </div>
           </form>
         </div>

@@ -21,15 +21,15 @@ public class Database {
     public Database() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            
+
             Properties prop = new Properties();
             InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
             prop.load(input);
-            
+
             String dbURL = prop.getProperty("DB_URL");
             String username = prop.getProperty("DB_USERNAME");
             String password = prop.getProperty("DB_PASSWORD");
-            
+
             conn = DriverManager.getConnection(dbURL, username, password);
         } catch (IOException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,5 +60,11 @@ public class Database {
             ps.setObject(i + 1, params[i]);
         }
         return ps.executeUpdate();
+    }
+
+    public int getLastInsertId() throws SQLException {
+        ResultSet rs = executeQuery("SELECT LAST_INSERT_ID()");
+        rs.next();
+        return rs.getInt(1);
     }
 }
