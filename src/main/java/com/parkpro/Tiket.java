@@ -58,6 +58,8 @@ public class Tiket {
     }
 
     public int hitungDurasi() {
-        return waktuMasuk.compareTo(waktuKeluar);
+        long milliseconds = waktuKeluar.getTime() - waktuMasuk.getTime();
+        long hours = (milliseconds + 3599999) / 3600000;
+        return (int) hours;
     }
 }

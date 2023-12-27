@@ -57,6 +57,13 @@ public class TiketServlet extends HttpServlet {
                 LahanParkir lahan = new LahanParkir(rs.getInt("id"), rs.getString("lantai"), rs.getString("lokasi"), rs.getInt("nomor"), rs.getBoolean("tersedia"));
                 request.setAttribute("lahan", lahan);
 
+                Boolean dibayar = false;
+                ResultSet rsPembayaran = DB.executeQuery("SELECT * FROM pembayaran WHERE id_tiket = ?", tiketID);
+                if (rsPembayaran.next()) {
+                    dibayar = true;
+                }
+                request.setAttribute("dibayar", dibayar);
+
                 request.getRequestDispatcher("tiketDetail.jsp").forward(request, response);
             } else {
                 ResultSet rs = DB.executeQuery("SELECT t.*, lp.* FROM tiket t JOIN lahan_parkir lp ON t.id_lahan_parkir = lp.id WHERE t.id_pengguna = ? ORDER BY t.id DESC LIMIT 5", session.getAttribute("id"));

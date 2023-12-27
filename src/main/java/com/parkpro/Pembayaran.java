@@ -1,6 +1,6 @@
 package com.parkpro;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -11,10 +11,10 @@ public class Pembayaran {
     private Tiket tiket;
     private Pengguna pengguna;
     private String metodePembayaran;
-    private Date waktuBayar;
+    private Timestamp waktuBayar;
     private int totalPembayaran;
 
-    public Pembayaran(int id, Tiket tiket, Pengguna pengguna, String metodePembayaran, Date waktuBayar, int totalPembayaran) {
+    public Pembayaran(int id, Tiket tiket, Pengguna pengguna, String metodePembayaran, Timestamp waktuBayar, int totalPembayaran) {
         this.id = id;
         this.tiket = tiket;
         this.pengguna = pengguna;
@@ -39,7 +39,7 @@ public class Pembayaran {
         return metodePembayaran;
     }
 
-    public Date getWaktuBayar() {
+    public Timestamp getWaktuBayar() {
         return waktuBayar;
     }
 
@@ -51,6 +51,7 @@ public class Pembayaran {
         int durasi = tiket.hitungDurasi();
         // int tarif = tiket.getLahan().getTarif();
         int tarif = 3000;
-        return durasi * tarif;
+        totalPembayaran = durasi * tarif;
+        return totalPembayaran;
     }
 }

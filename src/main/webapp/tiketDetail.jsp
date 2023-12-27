@@ -3,6 +3,7 @@
 <%
     Tiket tiket = (Tiket) request.getAttribute("tiket");
     LahanParkir lahan = (LahanParkir) request.getAttribute("lahan");
+    Boolean dibayar = (Boolean) request.getAttribute("dibayar");
 %>
 <!doctype html>
 <html lang="en">
@@ -56,6 +57,12 @@
               <%= tiket.getWaktuKeluar() %>
             </span>
           </div>
+          <div class="text-body-secondary">
+            Status pembayaran:
+            <span class="fw-bold">
+              <%= dibayar ? "Sudah dibayar" : "Belum dibayar" %>
+            </span>
+          </div>
         </div>
         <hr class="m-0 lh-1">
         <div class="col-12 p-2 text-center">
@@ -69,8 +76,28 @@
           </div>
         </div>
       </div>
-      <div class="col-12 d-grid mt-4">
-        <a href="/tiket" class="btn btn-primary">Kembali</a>
+      <% if (!dibayar) { %>
+      <form class="col-12 d-grid mt-2" action="BayarServlet" method="post">
+        <input type="hidden" name="id" id="id" value="<%= tiket.getId() %>">
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Bayar</button>
+        </div>
+      </form>
+      <% } %>
+    <% if (session.getAttribute("errorMessage") != null) { %>
+        <div class="alert alert-danger mt-2">
+            <%= session.getAttribute("errorMessage") %>
+        </div>
+        <% session.removeAttribute("errorMessage"); %>
+    <% } %>
+    <% if (session.getAttribute("successMessage") != null) { %>
+        <div class="alert alert-success mt-2">
+            <%= session.getAttribute("successMessage") %>
+        </div>
+        <% session.removeAttribute("successMessage"); %>
+    <% } %>
+      <div class="col-12 d-grid mt-2">
+        <a href="/tiket" class="btn btn-outline-primary">Kembali</a>
       </div>
     </div>
 
