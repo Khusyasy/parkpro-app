@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2023 at 03:29 PM
+-- Generation Time: Dec 28, 2023 at 03:19 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -146,7 +146,7 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id`, `no_telepon`, `password`, `gender`, `date_of_birth`, `nama`, `jenis_kendaraan`) VALUES
-(1, '+628123456789', '$2a$10$v/pNBGD1utxy0YOSeniv8eYhasrW3HIzJn/kQPce9eCfb57Eydx5u', 'male', '2003-05-11', 'Khusyasy', 'mobil');
+(1, '+628123456789', '$2a$10$7T5nUB2aOM91bl4XJZN4U.p9K/KrAkpaz.GuDPj89M9O4Bb52jV7.', 'male', '2003-11-05', 'ParkProUser', 'mobil');
 
 -- --------------------------------------------------------
 
